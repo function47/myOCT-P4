@@ -96,18 +96,6 @@ for i in range(params.nodeCount):
     # Assign to the node hosting the FPGA.
     node.hardware_type = "fpga-alveo"
     node.component_manager_id = "urn:publicid:IDN+cloudlab.umass.edu+authority+cm"
-	
-	# Add fileSystem for node 0
-    if i == 0:
-        iface = node.addInterface()
-        fsnode = request.RemoteBlockstore("fsnode", "/mydata")
-        fsnode.dataset = "urn:publicid:IDN+emulab.net:oct-fpga-p4+ltdataset+Vivado"
-        fslink = request.Link("fslink")
-        fslink.addInterface(iface)
-        fslink.addInterface(fsnode.interface)
-        fslink.best_effort = True
-        fslink.vlan_tagging = True
-        pc.printRequestRSpec()
     
     # Optional Blockstore
     if params.tempFileSystemSize > 0 or params.tempFileSystemMax:
